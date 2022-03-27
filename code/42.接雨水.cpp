@@ -32,17 +32,17 @@ public:
 
     // 动态规划
     // int trap(vector<int>& height) {
-    //     // 由上面的暴力解法推出，我们只需要创建两个数组保存每个位
-    //     // 置最右侧最高元素和最左侧最高元素即可
     //     int n = height.size();
     //     vector<int> leftMax(n, 0);
     //     vector<int> rightMax(n, 0);
+    //     // 保存左边最大高度
     //     for(int i = 0; i < n; ++i) {
     //         leftMax[i] = height[i];
     //         if(i - 1 >= 0 && leftMax[i] < leftMax[i - 1]) {
     //             leftMax[i] = leftMax[i - 1];
     //         }
     //     }
+    //     // 保存右边最大高度
     //     for(int i = n - 1; i >= 0; --i) {
     //         rightMax[i] = height[i];
     //         if(i + 1 < n && rightMax[i] < rightMax[i + 1]) {
