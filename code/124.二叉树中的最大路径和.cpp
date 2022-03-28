@@ -19,8 +19,22 @@
 class Solution {
 public:
     int maxPathSum(TreeNode* root) {
-        
+        dfs(root);
+        return max;
     }
+
+    int dfs(TreeNode* root) {
+        if(root == nullptr) {
+            return 0;
+        }
+        int leftMax = std::max(0, dfs(root->left));
+        int rightMax = std::max(0, dfs(root->right));
+        max = std::max(max, leftMax + rightMax + root->val);
+        return root->val + std::max(leftMax, rightMax);
+    }
+
+private:
+    int max = INT_MIN;
 };
 // @lc code=end
 
