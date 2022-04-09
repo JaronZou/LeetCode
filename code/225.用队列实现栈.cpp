@@ -7,25 +7,52 @@
 // @lc code=start
 class MyStack {
 public:
-    MyStack() {
+    MyStack() : isFirstEmpty(true) {
 
     }
     
     void push(int x) {
-
+        if(isFirstEmpty) {
+            que1.push(x);
+            while(!que2.empty()) {
+                que1.push(que2.front());
+                que2.pop();
+            }
+        }
+        else {
+            que2.push(x);
+            while(!que1.empty()) {
+                que2.push(que1.front());
+                que1.pop();
+            }
+        }
+        isFirstEmpty = !isFirstEmpty;
     }
     
     int pop() {
-
+        int ans = 0;
+        if(que1.empty()) {
+            ans = que2.front();
+            que2.pop();
+        }
+        else {
+            ans = que1.front();
+            que1.pop();
+        }
+        return ans;
     }
     
     int top() {
-
+        return isFirstEmpty ? que2.front() : que1.front();
     }
     
     bool empty() {
-
+        return que1.empty() && que2.empty();
     }
+private:
+    queue<int> que1;
+    queue<int> que2;
+    bool isFirstEmpty;
 };
 
 /**
