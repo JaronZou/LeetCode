@@ -35,23 +35,40 @@ public:
     // }
 
     // 非递归
+    // vector<int> inorderTraversal(TreeNode *root) {
+    //     vector<int> result;
+    //     stack<TreeNode*> nodeStack;
+    //     TreeNode *cur = root;
+    //     while(cur != nullptr || !nodeStack.empty()) {
+    //         if(cur != nullptr) {
+    //             nodeStack.push(cur);
+    //             cur = cur->left;
+    //         }
+    //         else {
+    //             cur = nodeStack.top();
+    //             nodeStack.pop();
+    //             result.push_back(cur->val);
+    //             cur = cur->right;
+    //         }
+    //     }
+    //     return result;
+    // }
+
     vector<int> inorderTraversal(TreeNode *root) {
-        vector<int> result;
-        stack<TreeNode*> nodeStack;
-        TreeNode *cur = root;
-        while(cur != nullptr || !nodeStack.empty()) {
-            if(cur != nullptr) {
-                nodeStack.push(cur);
-                cur = cur->left;
+        stack<TreeNode*> nodeStk;
+        vector<int> ans;
+        TreeNode *curr = root;
+        while(!nodeStk.empty() || curr != nullptr) {
+            while(curr) {
+                nodeStk.push(curr);
+                curr = curr->left;
             }
-            else {
-                cur = nodeStack.top();
-                nodeStack.pop();
-                result.push_back(cur->val);
-                cur = cur->right;
-            }
+            curr = nodeStk.top();
+            nodeStk.pop();
+            ans.push_back(curr->val);
+            curr = curr->right;
         }
-        return result;
+        return ans;
     }
 };
 // @lc code=end
